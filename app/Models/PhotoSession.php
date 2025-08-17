@@ -23,11 +23,13 @@ class PhotoSession extends Model
         'total_price',
         'currency',
         'kiosk_label',
+        'meta',
         'expires_at',
     ];
 
     protected $casts = [
         'total_price' => 'integer',
+        'meta' => 'array',
         'expires_at' => 'datetime',
     ];
 
