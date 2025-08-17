@@ -57,7 +57,7 @@
 
 ### 1. Clone the Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/sheenazien8/framee
 cd photobox
 ```
 
@@ -85,7 +85,7 @@ Update your `.env` file with database credentials:
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=photobox
+DB_DATABASE=framee
 DB_USERNAME=your_username
 DB_PASSWORD=your_password
 ```
@@ -224,33 +224,19 @@ photobox/
 ### Camera Settings
 Configure camera preferences in the frontend:
 ```javascript
-// resources/js/Components/Camera/CameraView.vue
-const cameraConstraints = {
-  video: {
-    width: { ideal: 1920 },
-    height: { ideal: 1080 },
-    facingMode: 'user'
-  }
-}
+// TODO:
 ```
 
 ### Session Management
 Configure session timeout in your model:
 ```php
-// app/Models/PhotoSession.php
-public const SESSION_TIMEOUT_MINUTES = 30;
+// TODO:
 ```
 
 ### Image Processing
 Customize image processing settings:
 ```php
-// config/services.php
-'image_processing' => [
-    'max_width' => 1920,
-    'max_height' => 1080,
-    'quality' => 90,
-    'format' => 'jpg'
-]
+// TODO:
 ```
 
 ## 📚 API Documentation
@@ -261,21 +247,7 @@ Customize image processing settings:
 ```http
 POST /api/v1/sessions          # Create new session
 GET /api/v1/sessions/{code}    # Get session by code
-PATCH /api/v1/sessions/{id}    # Update session status
-```
-
-#### Photo Operations
-```http
-POST /api/v1/photos           # Upload photo
-GET /api/v1/photos/{id}       # Get photo details
-POST /api/v1/photos/compose   # Compose photo with border
-```
-
-#### Payment Processing
-```http
-POST /api/v1/payments         # Create payment
-GET /api/v1/payments/{id}     # Get payment status
-POST /api/v1/payments/webhook # Payment webhook
+PATCH /api/v1/sessions/{code}    # Update session status
 ```
 
 ## 🔒 Security Features
