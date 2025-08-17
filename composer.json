@@ -1,13 +1,34 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "sheenazien8/framee",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Modern photo kiosk application with camera integration, frame selection, and payment processing built with Laravel and Vue.js",
     "keywords": [
         "laravel",
-        "framework"
+        "vue",
+        "photo-kiosk",
+        "camera",
+        "image-processing",
+        "payment-gateway",
+        "inertia",
+        "tailwind",
+        "intervention-image",
+        "qr-code",
+        "midtrans",
+        "xendit"
     ],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Sheena Zien",
+            "email": "sheenazien8@gmail.com"
+        }
+    ],
+    "homepage": "https://github.com/sheenazien8/framee",
+    "support": {
+        "issues": "https://github.com/sheenazien8/framee/issues",
+        "source": "https://github.com/sheenazien8/framee"
+    },
     "require": {
         "php": "^8.2",
         "inertiajs/inertia-laravel": "^2.0",
@@ -66,6 +87,25 @@
         "test": [
             "@php artisan config:clear --ansi",
             "@php artisan test"
+        ],
+        "format": [
+            "vendor/bin/pint"
+        ],
+        "format:check": [
+            "vendor/bin/pint --test"
+        ],
+        "analyze": [
+            "@format:check",
+            "@test"
+        ],
+        "fresh": [
+            "@php artisan migrate:fresh --seed"
+        ],
+        "setup": [
+            "@composer install",
+            "@php artisan key:generate",
+            "@php artisan storage:link",
+            "@fresh"
         ]
     },
     "extra": {

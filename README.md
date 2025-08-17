@@ -1,61 +1,366 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Framee
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Framee** is a modern photo kiosk application built with Laravel 12 and Vue.js that allows users to take photos, select decorative frames, and process payments through an intuitive touch-screen interface.
 
-## About Laravel
+## 🚀 Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Core Functionality
+- **Photo Capture**: Multi-photo capture with live camera feed
+- **Frame Selection**: Choose from a variety of decorative borders and frames
+- **Payment Processing**: Integrated payment gateway (Midtrans, Xendit) with QR code generation
+- **Session Management**: Unique session codes for tracking photo sessions
+- **Real-time Preview**: Live preview of photos with applied frames
+- **Download & Print**: QR code-based photo delivery system
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Technical Features
+- **Responsive Kiosk Interface**: Touch-optimized UI for kiosk environments
+- **Image Processing**: Server-side image composition with borders using Intervention Image
+- **Queue System**: Background processing for image composition tasks
+- **Role-based Permissions**: Admin panel with Spatie Laravel Permission
+- **RESTful API**: Clean API structure for frontend-backend communication
+- **Session Persistence**: Database-driven session management with expiration
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🛠️ Tech Stack
 
-## Learning Laravel
+### Backend
+- **Laravel 12** with PHP 8.2+
+- **MySQL** database
+- **Laravel Sanctum** for API authentication
+- **Spatie Laravel Permission** for role management
+- **Intervention Image** for image processing
+- **Simple QRCode** for QR code generation
+- **Queue workers** for background jobs
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Frontend
+- **Vue.js 3** with Composition API
+- **Inertia.js** for SPA experience
+- **TailwindCSS v4** for styling
+- **Pinia** for state management
+- **Vite** for asset bundling
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Development Tools
+- **Pest** for testing
+- **Laravel Pint** for code formatting
+- **Laravel Pail** for real-time logs
+- **Concurrently** for running multiple dev processes
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 📋 Requirements
 
-## Laravel Sponsors
+- PHP 8.2 or higher
+- Composer
+- Node.js 18+ and npm
+- MySQL 5.7+ or 8.0+
+- Camera access for photo capture
+- Modern web browser with WebRTC support
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🚀 Installation
 
-### Premium Partners
+### 1. Clone the Repository
+```bash
+git clone <repository-url>
+cd photobox
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 2. Install Dependencies
+```bash
+# Install PHP dependencies
+composer install
 
-## Contributing
+# Install Node.js dependencies
+npm install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Environment Setup
+```bash
+# Copy environment file
+cp .env.example .env
 
-## Code of Conduct
+# Generate application key
+php artisan key:generate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 4. Database Configuration
+Update your `.env` file with database credentials:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=photobox
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
 
-## Security Vulnerabilities
+### 5. Database Migration & Seeding
+```bash
+# Run migrations
+php artisan migrate
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# Seed the database with sample data
+php artisan db:seed
+```
 
-## License
+### 6. Storage Setup
+```bash
+# Create storage link
+php artisan storage:link
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Set proper permissions
+chmod -R 755 storage bootstrap/cache
+```
+
+### 7. Payment Gateway Configuration (Optional)
+Configure payment gateways in your `.env`:
+```env
+# For Midtrans
+MIDTRANS_SERVER_KEY=your_server_key
+MIDTRANS_CLIENT_KEY=your_client_key
+MIDTRANS_IS_PRODUCTION=false
+
+# For Xendit
+XENDIT_SECRET_KEY=your_secret_key
+XENDIT_PUBLIC_KEY=your_public_key
+```
+
+## 🏃‍♂️ Running the Application
+
+### Development Mode
+The project includes a convenient development script that runs all necessary services:
+```bash
+composer dev
+```
+
+This command starts:
+- Laravel development server (http://localhost:8000)
+- Queue worker for background jobs
+- Real-time log viewer (Laravel Pail)
+- Vite development server for hot reloading
+
+### Individual Commands
+If you prefer to run services separately:
+```bash
+# Laravel server
+php artisan serve
+
+# Frontend development
+npm run dev
+
+# Queue worker
+php artisan queue:work
+
+# Real-time logs
+php artisan pail
+```
+
+### Production Build
+```bash
+# Build frontend assets
+npm run build
+
+# Optimize Laravel
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+```
+
+## 🧪 Testing
+
+Run the test suite using Pest:
+```bash
+# Run all tests
+composer test
+# or
+php artisan test
+
+# Run specific test
+php artisan test --filter="test_name"
+
+# Run tests with coverage
+php artisan test --coverage
+```
+
+## 📝 Code Quality
+
+The project uses Laravel Pint for code formatting:
+```bash
+# Format code
+vendor/bin/pint
+
+# Check formatting without fixing
+vendor/bin/pint --test
+```
+
+## 🏗️ Project Structure
+
+```
+photobox/
+├── app/
+│   ├── Console/Commands/     # Artisan commands
+│   ├── Http/
+│   │   ├── Controllers/      # API and web controllers
+│   │   ├── Middleware/       # Custom middleware
+│   │   └── Requests/         # Form request validation
+│   ├── Jobs/                 # Queue jobs (image processing)
+│   ├── Models/               # Eloquent models
+│   └── Services/             # Business logic services
+├── database/
+│   ├── migrations/           # Database schema
+│   └── seeders/              # Sample data
+├── resources/
+│   ├── js/
+│   │   ├── Components/       # Vue.js components
+│   │   ├── Layouts/          # Page layouts
+│   │   ├── Pages/            # Inertia.js pages
+│   │   └── stores/           # Pinia stores
+│   └── css/                  # Stylesheets
+├── routes/
+│   ├── web.php               # Web routes
+│   ├── api.php               # API routes
+│   └── auth.php              # Authentication routes
+└── tests/                    # Pest tests
+```
+
+## 🔧 Configuration
+
+### Camera Settings
+Configure camera preferences in the frontend:
+```javascript
+// resources/js/Components/Camera/CameraView.vue
+const cameraConstraints = {
+  video: {
+    width: { ideal: 1920 },
+    height: { ideal: 1080 },
+    facingMode: 'user'
+  }
+}
+```
+
+### Session Management
+Configure session timeout in your model:
+```php
+// app/Models/PhotoSession.php
+public const SESSION_TIMEOUT_MINUTES = 30;
+```
+
+### Image Processing
+Customize image processing settings:
+```php
+// config/services.php
+'image_processing' => [
+    'max_width' => 1920,
+    'max_height' => 1080,
+    'quality' => 90,
+    'format' => 'jpg'
+]
+```
+
+## 📚 API Documentation
+
+### Key Endpoints
+
+#### Session Management
+```http
+POST /api/v1/sessions          # Create new session
+GET /api/v1/sessions/{code}    # Get session by code
+PATCH /api/v1/sessions/{id}    # Update session status
+```
+
+#### Photo Operations
+```http
+POST /api/v1/photos           # Upload photo
+GET /api/v1/photos/{id}       # Get photo details
+POST /api/v1/photos/compose   # Compose photo with border
+```
+
+#### Payment Processing
+```http
+POST /api/v1/payments         # Create payment
+GET /api/v1/payments/{id}     # Get payment status
+POST /api/v1/payments/webhook # Payment webhook
+```
+
+## 🔒 Security Features
+
+- **CSRF Protection**: Built-in Laravel CSRF protection
+- **Input Validation**: Comprehensive request validation
+- **File Upload Security**: Secure file handling with type validation
+- **Session Security**: Secure session management with expiration
+- **Payment Security**: PCI-compliant payment processing
+
+## 🚀 Deployment
+
+### Environment Setup
+1. Set `APP_ENV=production` in `.env`
+2. Configure production database credentials
+3. Set up proper file permissions
+4. Configure web server (Nginx/Apache)
+5. Set up SSL certificates
+6. Configure payment gateway production keys
+
+### Performance Optimization
+```bash
+# Cache configuration
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+# Optimize autoloader
+composer install --optimize-autoloader --no-dev
+
+# Queue workers
+php artisan queue:restart
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Run tests (`composer test`)
+5. Push to the branch (`git push origin feature/amazing-feature`)
+6. Open a Pull Request
+
+### Development Guidelines
+- Follow PSR-12 coding standards
+- Write tests for new features
+- Use conventional commit messages
+- Update documentation for API changes
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**Camera not working:**
+- Ensure HTTPS is enabled (required for camera access)
+- Check browser permissions for camera access
+- Verify WebRTC support in the browser
+
+**Queue jobs not processing:**
+- Start the queue worker: `php artisan queue:work`
+- Check queue configuration in `.env`
+- Monitor failed jobs: `php artisan queue:failed`
+
+**Image composition fails:**
+- Verify GD/Imagick extension is installed
+- Check file permissions in storage directory
+- Monitor Laravel logs for specific errors
+
+**Payment webhook issues:**
+- Verify webhook URL is accessible
+- Check payment gateway configuration
+- Review webhook logs in payment provider dashboard
+
+## 📄 License
+
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## 🙏 Acknowledgments
+
+- Laravel framework and community
+- Vue.js ecosystem
+- TailwindCSS for beautiful styling
+- Intervention Image for image processing
+- All the amazing open-source contributors
+
+---
+
+**Built with ❤️ for creating memorable photo experiences**
